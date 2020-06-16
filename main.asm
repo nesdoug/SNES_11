@@ -114,7 +114,7 @@ main:
 ;copy the indirect hdma table for effect 3	
 	jsr copy_f3
 
-	lda #1 ; mode 1, tilesize 8x8 all, layer 3 on top
+	lda #1 ; mode 1, tilesize 8x8 all
 	sta bg_size_mode ; $2105
 	stz bg12_tiles ; $210b BG 1 and 2 TILES at VRAM address $0000
 	lda #$60 ; bg1 map at VRAM address $6000
