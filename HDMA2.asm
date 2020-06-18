@@ -21,7 +21,7 @@ set_f2:
 ;window_logic_bg = $212a ... keep it zero
 
 	stz $4300 ;1 register, write once
-	lda #$26 ;window1_L
+	lda #$26 ;2126 window1_L
 	sta $4301 ;destination
 	ldx #.loword(H_TABLE3)
 	stx $4302 ;address
@@ -29,8 +29,8 @@ set_f2:
 	sta $4304 ;address
 	
 
-	stz $4310 ;1 register, write twice
-	lda #$27 ;window1_R
+	stz $4310 ;1 register, write once
+	lda #$27 ;2127 window1_R
 	sta $4311 ;destination
 	ldx #.loword(H_TABLE4)
 	stx $4312 ;address

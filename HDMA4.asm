@@ -9,7 +9,7 @@
 set_f4:
 	A8
 	XY16
-	lda #$0f
+	lda #$0f ; off / normal
 	sta mosaic ;= $2106
 	
 	stz $4300 ;1 register, write once
