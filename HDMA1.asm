@@ -8,12 +8,9 @@
 
 .segment "CODE"
 
-set_f1:
+Set_F1:
 	A8
 	XY16
-	stz pal_addr ;2121
-	stz pal_data ;2122
-	stz pal_data
 	
 	stz $4300 ;1 register, write once
 	lda #$21 ;pal_addr
@@ -37,17 +34,11 @@ set_f1:
 	
 	
 	lda #3 ;channels 1 and 2
-	sta hdma_enable ;$420c
+	sta HDMAEN ;$420c
 	rts
 	
+	
 
-exit_f1:
-	A8
-;make sure that background color is black	
-	stz pal_addr ;2121
-	stz pal_data ;2122
-	stz pal_data
-	rts
 	
 	
 ;palette address	
@@ -106,3 +97,4 @@ H_TABLE2:
 .byte 10, 19, 0
 .byte 10, 20, 0
 .byte 0
+

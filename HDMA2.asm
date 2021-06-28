@@ -1,27 +1,26 @@
 ;hdma effect 2
 ;change the window 1 register
 
-;using a multi line command
+;2 separate hdma channels
+
+;Note if left window is > right, it won't show.
 
 
 .segment "CODE"
 
-set_f2:
+Set_F2:
 	A8
 	XY16
 	lda #1 ;windows active on layer 1 on main screen
-	sta main_window ;$212e
+	sta TMW ;$212e
 	lda #2 ;window 1 active on layer 1
-	sta bg12_window ;$2123
-	lda #$ff
-	sta window1_L ;$2126
-	stz window1_R ;$2127
-;if left is > right, it won't show.
+	sta W12SEL ;$2123
+
 	
 ;window_logic_bg = $212a ... keep it zero
 
 	stz $4300 ;1 register, write once
-	lda #$26 ;2126 window1_L
+	lda #$26 ;2126 WH0
 	sta $4301 ;destination
 	ldx #.loword(H_TABLE3)
 	stx $4302 ;address
@@ -30,7 +29,7 @@ set_f2:
 	
 
 	stz $4310 ;1 register, write once
-	lda #$27 ;2127 window1_R
+	lda #$27 ;2127 WH1
 	sta $4311 ;destination
 	ldx #.loword(H_TABLE4)
 	stx $4312 ;address
@@ -38,15 +37,11 @@ set_f2:
 	sta $4314 ;address
 	
 	lda #3 ;channels 1 and 2
-	sta hdma_enable ;$420c
+	sta HDMAEN ;$420c
 	rts
+	
 
-exit_f2:
-	A8
-;make sure windows are off	
-	stz main_window ;$212e
-	stz bg12_window ;$2123
-	rts
+
 	
 	
 ;NOTE, if the # of scanlines has the upper bit $80 set

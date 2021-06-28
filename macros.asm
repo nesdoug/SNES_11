@@ -35,6 +35,8 @@
 
 
 
+
+
 ; memcpy, block move
 ;for WRAM to WRAM data transfers (can't be done with DMA)
 .macro BLOCK_MOVE  length, src_addr, dst_addr
@@ -52,10 +54,22 @@
 	.byte $54, ^dst_addr, ^src_addr
 	plb
 .endmacro
-;originally, the ca65 assembler, mvn assembled
-;its operands backwards from standard syntax mvn src,dst
-;Fixed in July 27, 2018 build of ca65
-;I opted to use a .byte directive to make sure no
-;errors from different versions of ca65
+
+
+
+;first set vram_adr and vram_inc
+;decompresses rle files AND copy to vram
+.macro UNPACK_TO_VRAM  src_address
+.if .asize = 8
+	rep #$30
+.elseif .isize = 8
+	rep #$30
+.endif
+	lda #.loword(src_address)
+	ldx #^src_address
+	jsl Unrle
+	jsl DMA_VRAM
+.endmacro
+
 
 

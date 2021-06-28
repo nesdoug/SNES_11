@@ -12,6 +12,7 @@ Press A,B,X, or Y to change between...
 2-window 1 (diamond shape)
 3-horizontal scrolling
 4-mosaic
+5-window 1 combined with color math (blue box)
 
 nesdoug.com
 

@@ -8,7 +8,7 @@
 .segment "CODE"
 
 
-copy_f3:
+Copy_F3:
 	php
 	AXY16
 	BLOCK_MOVE  (end_IT-IND_TABLE), IND_TABLE, $7e1000
@@ -16,17 +16,13 @@ copy_f3:
 	rts
 
 
-set_f3:
+Set_F3:
 	A8
 	XY16
-	stz bg1_scroll_x ;= $210d
-	stz bg1_scroll_x ;write twice register
-	
-	jsr Shuffle_f3
 	
 	lda #$42 ;indirect mode = the 0100 0000 bit ($40)
 	sta $4300 ;1 register, write twice
-	lda #$0d ;bg1_scroll_x horizontal scroll bg1
+	lda #$0d ;BG1HOFS horizontal scroll bg1
 	sta $4301 ;destination
 	ldx #.loword(H_TABLE5)
 	stx $4302 ;address
@@ -36,18 +32,14 @@ set_f3:
 	sta $4307 ;indirect address bank
 	
 	lda #1 ;channel 1
-	sta hdma_enable ;$420c
+	sta HDMAEN ;$420c
 	rts
 	
 
-exit_f3:
-	A8
-;make sure H scroll is back to normal	
-	stz bg1_scroll_x ;= $210d
-	stz bg1_scroll_x ;write twice register
-	rts
+
 	
-Shuffle_f3:
+	
+Shuffle_F3:
 	php
 	A8
 	lda frame_count
