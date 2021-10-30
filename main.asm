@@ -15,7 +15,6 @@
 .include "HDMA3.asm"
 .include "HDMA4.asm"
 .include "HDMA5.asm"
-.include "library.asm"
 
 
 
