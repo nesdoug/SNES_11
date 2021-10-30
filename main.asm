@@ -15,7 +15,7 @@
 .include "HDMA3.asm"
 .include "HDMA4.asm"
 .include "HDMA5.asm"
-
+.include "library.asm"
 
 
 
@@ -289,16 +289,16 @@ DMA_VRAM:
 
 BG_Palette:
 ; 256 bytes
-.incbin "ImageConverter/Background.pal"
+.incbin "M1TE/Background.pal"
 
 Tiles:
 ; 4bpp tileset
-.incbin "ImageConverter/AllTiles.rle"
+.incbin "M1TE/AllTiles.rle"
 
 
 
 Tilemap:
-.incbin "ImageConverter/FullMap.rle"
+.incbin "M1TE/FullMap.rle"
 
 
 
